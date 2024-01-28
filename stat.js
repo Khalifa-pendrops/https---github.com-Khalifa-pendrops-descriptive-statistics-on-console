@@ -1,8 +1,9 @@
-//create descriptive statistics class
+// create descriptive statistics class
 class MyDescriptiveStatistics {
   constructor(data) {
     this.data = data;
   }
+
   // method/function to calculate the mean (average)
   calcMean() {
     const sum = this.data.reduce((acc, value) => acc + value, 0);
@@ -68,7 +69,7 @@ class MyDescriptiveStatistics {
 
   // method/function to calculate the mean deviation
   calcMeanDeviation() {
-    const mean = this.calculateMean();
+    const mean = this.calcMean(); // Fix method name here
     const stdDev = this.calcStandardDeviation();
     const cubedDifferences = this.data.map((value) =>
       Math.pow((value - mean) / stdDev, 3)
@@ -82,7 +83,7 @@ class MyDescriptiveStatistics {
 
   // method/function to calculate the quartile deviation
   calcQuartileDeviation() {
-    const mean = this.calculateMean();
+    const mean = this.calcMean(); // Fix method name here
     const stdDev = this.calcStandardDeviation();
     const fourthPowerDifferences = this.data.map((value) =>
       Math.pow((value - mean) / stdDev, 4)
@@ -94,12 +95,13 @@ class MyDescriptiveStatistics {
     return sumFourthPowerDifferences / this.data.length;
   }
 }
-//array of data
+
+// array of data
 const data = [11, 22, 29, 33, 40, 40, 40, 75];
-//instantiated object
+// instantiated object
 const stats = new MyDescriptiveStatistics(data);
 
-//To print result of descriptive statistics calculated
+// To print the result of descriptive statistics calculated
 console.log("Mean:", stats.calcMean());
 console.log("Median:", stats.calcMedian());
 console.log("Mode:", stats.calcMode());
