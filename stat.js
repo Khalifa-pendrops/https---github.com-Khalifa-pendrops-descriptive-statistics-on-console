@@ -42,15 +42,15 @@ class MyDescriptiveStatistics {
   }
 
   // Function to calculate the range (difference between max and min)
-  calculateRange() {
+  calcRange() {
     const max = Math.max(...this.data);
     const min = Math.min(...this.data);
     return max - min;
   }
 
   // method/function to calculate the variance
-  calculateVariance() {
-    const mean = this.calculateMean();
+  calcVariance() {
+    const mean = this.calcMean();
     const squaredDifferences = this.data.map((value) =>
       Math.pow(value - mean, 2)
     );
@@ -62,10 +62,49 @@ class MyDescriptiveStatistics {
   }
 
   // method/function to calculate the standard deviation
-  calculateStandardDeviation() {
-    return Math.sqrt(this.calculateVariance());
-    }
-    
-    
+  calcStandardDeviation() {
+    return Math.sqrt(this.calcVariance());
+  }
 
-}    
+  // method/function to calculate the mean deviation
+  calcMeanDeviation() {
+    const mean = this.calculateMean();
+    const stdDev = this.calcStandardDeviation();
+    const cubedDifferences = this.data.map((value) =>
+      Math.pow((value - mean) / stdDev, 3)
+    );
+    const sumCubedDifferences = cubedDifferences.reduce(
+      (acc, value) => acc + value,
+      0
+    );
+    return sumCubedDifferences / this.data.length;
+  }
+
+  // method/function to calculate the quartile deviation
+  calcQuartileDeviation() {
+    const mean = this.calculateMean();
+    const stdDev = this.calcStandardDeviation();
+    const fourthPowerDifferences = this.data.map((value) =>
+      Math.pow((value - mean) / stdDev, 4)
+    );
+    const sumFourthPowerDifferences = fourthPowerDifferences.reduce(
+      (acc, value) => acc + value,
+      0
+    );
+    return sumFourthPowerDifferences / this.data.length;
+  }
+}
+//array of data
+const data = [11, 22, 29, 33, 40, 40, 40, 75];
+//instantiated object
+const stats = new MyDescriptiveStatistics(data);
+
+//To print result of descriptive statistics calculated
+console.log("Mean:", stats.calcMean());
+console.log("Median:", stats.calcMedian());
+console.log("Mode:", stats.calcMode());
+console.log("Range:", stats.calcRange());
+console.log("Variance:", stats.calcVariance());
+console.log("Standard Deviation:", stats.calcStandardDeviation());
+console.log("Mean Deviation:", stats.calcMeanDeviation());
+console.log("Quartile Deviation:", stats.calcQuartileDeviation());
